@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  datasource:
+    url: jdbc:mysql://localhost:PORT/DB_NAME
+    username: changeMe
+    password: changeMe
+server:
+  port: 80
