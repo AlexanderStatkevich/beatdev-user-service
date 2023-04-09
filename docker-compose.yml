@@ -1,0 +1,17 @@
+services:
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: user-service:1.0.0
+    depends_on:
+      - user-db
+
+  user-db:
+    image: mysql:8.0.32-oracle
+    restart: always
+    volumes:
+      - ./user-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: users

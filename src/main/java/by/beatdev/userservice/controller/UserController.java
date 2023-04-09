@@ -9,11 +9,13 @@ import by.beatdev.userservice.exception.custom.UserEmailInBlacklistException;
 import by.beatdev.userservice.exception.response.ErrorResponse;
 import by.beatdev.userservice.mapper.UserMapper;
 import by.beatdev.userservice.service.IUserService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import javax.validation.Valid;
+
+
 @Tag(name = "Users API")
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/users")

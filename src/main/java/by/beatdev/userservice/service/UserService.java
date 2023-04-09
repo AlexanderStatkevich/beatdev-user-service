@@ -5,10 +5,11 @@ import by.beatdev.userservice.domain.UserStatus;
 import by.beatdev.userservice.dto.UserUpdateDto;
 import by.beatdev.userservice.dto.UserUpdateResponseDto;
 import by.beatdev.userservice.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 
 @RequiredArgsConstructor
 @Service
@@ -35,7 +36,7 @@ public class UserService implements IUserService {
     public UserUpdateResponseDto update(Long id, UserUpdateDto userUpdateDto) {
         User user = repository.getReferenceById(id);
         UserStatus previousStatus = user.getStatus();
-        UserStatus currentStatus = userUpdateDto.status();
+        UserStatus currentStatus = userUpdateDto.getStatus();
         user.setStatus(currentStatus);
         repository.save(user);
         return new UserUpdateResponseDto(id, currentStatus, previousStatus);
