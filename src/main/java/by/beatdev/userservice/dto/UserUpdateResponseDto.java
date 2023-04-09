@@ -1,15 +1,17 @@
 package by.beatdev.userservice.dto;
 
 import by.beatdev.userservice.domain.UserStatus;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
+@Jacksonized
 @Getter
 public class UserUpdateResponseDto {
-    private Long id;
-    private UserStatus currentStatus;
-    private UserStatus previousStatus;
+    private final Long id;
+    private final UserStatus currentStatus;
+    private final UserStatus previousStatus;
 }

@@ -5,13 +5,31 @@ services:
       dockerfile: Dockerfile
     image: user-service:1.0.0
     depends_on:
-      - user-db
+      user-db:
+        condition: service_healthy
+    ports:
+      - 80:80
+    networks:
+      - user-network
 
   user-db:
-    image: mysql:8.0.32-oracle
+    image: mysql:8.0.32
     restart: always
     volumes:
       - ./user-service/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: users
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 2s
+      retries: 5
+      interval: 10s
+    networks:
+      - user-network
+
+networks:
+  user-network:
+    name: user-network

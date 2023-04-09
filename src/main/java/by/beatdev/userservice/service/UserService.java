@@ -6,11 +6,13 @@ import by.beatdev.userservice.dto.UserUpdateDto;
 import by.beatdev.userservice.dto.UserUpdateResponseDto;
 import by.beatdev.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService implements IUserService {
@@ -28,15 +30,19 @@ public class UserService implements IUserService {
 
     @Override
     public User findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
     }
 
     @Override
     @Transactional
     public UserUpdateResponseDto update(Long id, UserUpdateDto userUpdateDto) {
-        User user = repository.getReferenceById(id);
+        User user = findById(id);
         UserStatus previousStatus = user.getStatus();
         UserStatus currentStatus = userUpdateDto.getStatus();
+        if (previousStatus == currentStatus) {
+            log.warn("The current status is the same as the previous one");
+        }
         user.setStatus(currentStatus);
         repository.save(user);
         return new UserUpdateResponseDto(id, currentStatus, previousStatus);

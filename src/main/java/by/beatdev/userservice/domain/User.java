@@ -1,41 +1,25 @@
 package by.beatdev.userservice.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "date_time_create")
-    private LocalDateTime dateTimeCreate;
-
-    @Column(name = "date_time_update")
-    private LocalDateTime dateTimeUpdate;
+public class User extends BaseEntity {
 
     @Column(name = "email")
     private String email;
@@ -43,7 +27,7 @@ public class User {
     @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "image_uri", columnDefinition = "LONGTEXT")
+    @Column(name = "image_uri", columnDefinition = "text")
     private String imageUri;
 
     @Enumerated(EnumType.STRING)
@@ -52,11 +36,4 @@ public class User {
 
     @Column(name = "password")
     private String password;
-
-    @PrePersist
-    void initDateCreate() {
-        LocalDateTime now = LocalDateTime.now();
-        this.dateTimeCreate = now;
-        this.dateTimeUpdate = now;
-    }
 }

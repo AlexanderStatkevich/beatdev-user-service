@@ -3,6 +3,7 @@ package by.beatdev.userservice.exception;
 import by.beatdev.userservice.exception.response.ErrorResponse;
 import by.beatdev.userservice.exception.response.ErrorResponseUtils;
 import by.beatdev.userservice.exception.response.StructuredErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -19,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -44,12 +46,11 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<List<ErrorResponse>> handleHttpMessageNotReadable() {
+    public ResponseEntity<List<ErrorResponse>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
         String message = "incorrect input";
         ErrorResponse errorResponse = new ErrorResponse(message);
         return ResponseEntity.badRequest().body(Collections.singletonList(errorResponse));
     }
-
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<List<ErrorResponse>> handleAuthException(EntityNotFoundException ex) {
@@ -59,6 +60,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<List<ErrorResponse>> handleException(Exception ex) {
+        log.error("Unexpected server exception", ex);
         String message = "server was unable to process the request correctly, please contact the administrator";
         ErrorResponse errorResponse = new ErrorResponse(message);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonList(errorResponse));

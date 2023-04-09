@@ -3,33 +3,33 @@ package by.beatdev.userservice.dto;
 
 import by.beatdev.userservice.domain.UserStatus;
 import by.beatdev.userservice.validation.UniqueEntity;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
+@Jacksonized
 @Getter
 public class UserCreateDto {
 
     @NotBlank
-    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     @UniqueEntity
-    private String email;
+    private final String email;
 
     @NotBlank
-    private String fullName;
+    private final String fullName;
 
     @NotBlank
-    private String imageUri;
+    private final String imageUri;
 
     @NotNull
-    private UserStatus status;
+    private final UserStatus status;
 
     @NotBlank
-    private String password;
+    private final String password;
 }

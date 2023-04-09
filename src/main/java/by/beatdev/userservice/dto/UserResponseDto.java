@@ -2,22 +2,24 @@ package by.beatdev.userservice.dto;
 
 
 import by.beatdev.userservice.domain.UserStatus;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
+@Jacksonized
 @Getter
 public class UserResponseDto {
-    private Long id;
-    private LocalDateTime dateTimeCreate;
-    private LocalDateTime dateTimeUpdate;
-    private String email;
-    private String fullName;
-    private String imageUri;
-    private UserStatus status;
-    private String password;
+    private final Long id;
+    private final LocalDateTime dateTimeCreate;
+    private final LocalDateTime dateTimeUpdate;
+    private final String email;
+    private final String fullName;
+    private final String imageUri;
+    private final UserStatus status;
+    private final String password;
 }

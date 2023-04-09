@@ -28,7 +28,6 @@ import javax.validation.Valid;
 
 
 @Tag(name = "Users API")
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/users")
