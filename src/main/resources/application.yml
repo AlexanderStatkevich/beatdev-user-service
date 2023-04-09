@@ -9,7 +9,8 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
   datasource:
     url: jdbc:mysql://localhost:PORT/DB_NAME
-    username: changeMe
-    password: changeMe
+    username: changeME
+    password: changeME
 server:
   port: 80
+
