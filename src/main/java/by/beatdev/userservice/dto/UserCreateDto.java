@@ -2,6 +2,7 @@ package by.beatdev.userservice.dto;
 
 
 import by.beatdev.userservice.domain.UserStatus;
+import by.beatdev.userservice.validation.UniqueEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,15 +15,21 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @Getter
 public class UserCreateDto {
+
     @NotBlank
     @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
-    String email;
+    @UniqueEntity
+    private String email;
+
     @NotBlank
-    String fullName;
+    private String fullName;
+
     @NotBlank
-    String imageUri;
+    private String imageUri;
+
     @NotNull
-    UserStatus status;
+    private UserStatus status;
+
     @NotBlank
-    String password;
+    private String password;
 }
