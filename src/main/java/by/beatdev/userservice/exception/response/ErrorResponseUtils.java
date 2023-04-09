@@ -1,11 +1,12 @@
 package by.beatdev.userservice.exception.response;
 
-import jakarta.validation.ConstraintViolation;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
+import javax.validation.ConstraintViolation;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class ErrorResponseUtils {
 
@@ -15,21 +16,21 @@ public final class ErrorResponseUtils {
     public static StructuredErrorResponse buildStructuredObjectErrorResponse(List<ObjectError> errors) {
         List<ErrorResponseField> errorResponseFields = errors.stream()
                 .map(ErrorResponseUtils::buildErrorResponseFiled)
-                .toList();
+                .collect(Collectors.toList());
         return new StructuredErrorResponse(errorResponseFields);
     }
 
     public static StructuredErrorResponse buildStructuredConstraintViolationResponse(Collection<ConstraintViolation<?>> errors) {
         List<ErrorResponseField> errorResponseFields = errors.stream()
                 .map(ErrorResponseUtils::buildErrorResponseFiled)
-                .toList();
+                .collect(Collectors.toList());
         return new StructuredErrorResponse(errorResponseFields);
     }
 
     private static ErrorResponseField buildErrorResponseFiled(ObjectError objectError) {
         String message = objectError.getDefaultMessage();
-        String field = objectError instanceof FieldError fieldError
-                ? fieldError.getField()
+        String field = objectError instanceof FieldError
+                ? ((FieldError) objectError).getField()
                 : "";
         return new ErrorResponseField(field, message);
     }

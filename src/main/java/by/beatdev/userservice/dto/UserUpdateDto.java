@@ -1,11 +1,16 @@
 package by.beatdev.userservice.dto;
 
 import by.beatdev.userservice.domain.UserStatus;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 
-public record UserUpdateDto(
-        @NotNull
-        UserStatus status
-) {
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class UserUpdateDto {
+    @NotNull
+    UserStatus status;
 }

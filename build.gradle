@@ -1,12 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.5'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'by.beatdev'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+version = '0.1'
+sourceCompatibility = '1.8'
 
 configurations {
     compileOnly {
@@ -23,22 +23,31 @@ ext {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.flywaydb:flyway-core'
-    implementation 'org.flywaydb:flyway-mysql'
+    implementation(
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'org.springframework.boot:spring-boot-starter-security',
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-validation',
+            'org.flywaydb:flyway-core',
+            'org.flywaydb:flyway-mysql',
+            'org.mapstruct:mapstruct:1.5.3.Final'
+    )
+
+    annotationProcessor(
+            'org.mapstruct:mapstruct-processor:1.5.3.Final',
+            'org.projectlombok:lombok-mapstruct-binding:0.2.0',
+            'org.projectlombok:lombok'
+    )
+
     compileOnly 'org.projectlombok:lombok'
+
     runtimeOnly 'com.mysql:mysql-connector-j'
 
-    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.testcontainers:mysql'
+    testImplementation(
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.testcontainers:junit-jupiter',
+            'org.testcontainers:mysql')
 }
 
 dependencyManagement {

@@ -10,8 +10,8 @@ public class FieldErrorResponse {
     public FieldErrorResponse(ObjectError objectError) {
         this.message = objectError.getDefaultMessage();
 
-        if (objectError instanceof FieldError fieldError) {
-            this.field = fieldError.getField();
+        if (objectError instanceof FieldError) {
+            this.field = ((FieldError) objectError).getField();
         } else {
             this.field = "";
         }
