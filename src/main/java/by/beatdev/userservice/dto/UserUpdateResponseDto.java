@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class UserUpdateResponseDto {
-    Long id;
-    UserStatus currentStatus;
-    UserStatus previousStatus;
+    private Long id;
+    private UserStatus currentStatus;
+    private UserStatus previousStatus;
 }

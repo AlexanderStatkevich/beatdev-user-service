@@ -41,4 +41,8 @@ public class UserService implements IUserService {
         repository.save(user);
         return new UserUpdateResponseDto(id, currentStatus, previousStatus);
     }
+
+    public boolean exists(String email) {
+        return repository.existsByEmail(email);
+    }
 }

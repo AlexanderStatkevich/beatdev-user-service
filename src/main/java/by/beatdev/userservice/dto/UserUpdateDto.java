@@ -12,5 +12,5 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class UserUpdateDto {
     @NotNull
-    UserStatus status;
+    private UserStatus status;
 }

@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class UserResponseDto {
-    Long id;
-    LocalDateTime dateTimeCreate;
-    LocalDateTime dateTimeUpdate;
-    String email;
-    String fullName;
-    String imageUri;
-    UserStatus status;
-    String password;
+    private Long id;
+    private LocalDateTime dateTimeCreate;
+    private LocalDateTime dateTimeUpdate;
+    private String email;
+    private String fullName;
+    private String imageUri;
+    private UserStatus status;
+    private String password;
 }
