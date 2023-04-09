@@ -12,5 +12,7 @@ spring:
     username: changeMe
     password: changeMe
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 server:
   port: 80
+

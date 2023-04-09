@@ -2,7 +2,13 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.10'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.springframework.boot' version '3.0.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springdoc.openapi-gradle-plugin' version '1.6.0'
+    id 'checkstyle'
+
 }
+apply plugin: 'idea'
 
 group = 'by.beatdev'
 version = '0.1'
@@ -23,14 +29,17 @@ ext {
 }
 
 dependencies {
+
     implementation(
             'org.springframework.boot:spring-boot-starter-data-jpa',
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-validation',
+            'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0',
             'org.flywaydb:flyway-core',
             'org.flywaydb:flyway-mysql',
             'org.mapstruct:mapstruct:1.5.3.Final'
+            'io.swagger.core.v3:swagger-annotations:2.2.8'
     )
 
     annotationProcessor(
@@ -42,7 +51,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
-
 
     testImplementation(
             'org.springframework.boot:spring-boot-starter-test',
