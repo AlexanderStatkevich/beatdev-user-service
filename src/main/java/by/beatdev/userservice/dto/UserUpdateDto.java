@@ -1,16 +1,18 @@
 package by.beatdev.userservice.dto;
 
 import by.beatdev.userservice.domain.UserStatus;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
+@Jacksonized
 @Getter
 public class UserUpdateDto {
     @NotNull
-    UserStatus status;
+    private final UserStatus status;
 }

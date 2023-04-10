@@ -1,3 +1,6 @@
+server:
+  port: 80
+
 spring:
   jpa:
     database: MYSQL
@@ -6,13 +9,9 @@ spring:
       ddl-auto: validate
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
   datasource:
-    url: jdbc:mysql://localhost:PORT/DB_NAME
-    username: changeMe
-    password: changeMe
+    url: jdbc:mysql://user-db:3306/users
+    username: admin
+    password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-server:
-  port: 80
-

@@ -1,15 +1,20 @@
 package by.beatdev.userservice.dto;
 
 import by.beatdev.userservice.domain.UserStatus;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Builder
+@Jacksonized
 @Getter
 public class UserUpdateResponseDto {
-    Long id;
-    UserStatus currentStatus;
-    UserStatus previousStatus;
+    private final Long id;
+    @JsonProperty(value = "current_status")
+    private final UserStatus currentStatus;
+    @JsonProperty(value = "previous_status")
+    private final UserStatus previousStatus;
 }

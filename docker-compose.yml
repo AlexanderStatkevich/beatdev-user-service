@@ -4,14 +4,25 @@ services:
       context: .
       dockerfile: Dockerfile
     image: user-service:1.0.0
-    depends_on:
-      - user-db
+    restart: on-failure
+    ports:
+      - 80:80
+    networks:
+      - user-network
 
   user-db:
-    image: mysql:8.0.32-oracle
+    image: mysql:8.0.32
     restart: always
     volumes:
       - ./user-service/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: users
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    networks:
+      - user-network
+
+networks:
+  user-network:
+    name: user-network
