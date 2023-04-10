@@ -47,6 +47,9 @@ dependencies {
 
     testImplementation(
             'org.springframework.boot:spring-boot-starter-test',
+            "org.mockito:mockito-core:${mockitoVersion}",
+            "org.mockito:mockito-junit-jupiter:${mockitoVersion}",
+            'org.assertj:assertj-core:3.24.2',
             'org.testcontainers:junit-jupiter',
             'org.testcontainers:mysql')
 }
