@@ -9,6 +9,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This annotation should point on fields that have unique constraint in database.
+ */
 @Documented
 @Constraint(validatedBy = EntityExistValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})

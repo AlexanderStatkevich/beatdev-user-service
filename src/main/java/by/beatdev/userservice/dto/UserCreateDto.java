@@ -10,6 +10,7 @@ import lombok.extern.jackson.Jacksonized;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @RequiredArgsConstructor
 @Builder
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 public class UserCreateDto {
 
     @NotBlank
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     @UniqueEntity
     private final String email;
 

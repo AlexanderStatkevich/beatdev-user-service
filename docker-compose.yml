@@ -4,9 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: user-service:1.0.0
-    depends_on:
-      user-db:
-        condition: service_healthy
+    restart: on-failure
     ports:
       - 80:80
     networks:
@@ -22,11 +20,6 @@ services:
       MYSQL_DATABASE: users
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
-    healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-      timeout: 2s
-      retries: 5
-      interval: 10s
     networks:
       - user-network
 

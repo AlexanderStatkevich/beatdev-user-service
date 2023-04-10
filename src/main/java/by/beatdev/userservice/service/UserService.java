@@ -12,6 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
+/**
+ * Described class is the core of the system.
+ * It binds storage and output of application.
+ * As well as uses CRUD operations for this purpose.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -20,6 +25,12 @@ public class UserService implements IUserService {
     private final IBlacklistCheckEmailService userVerifyEmailService;
     private final UserRepository repository;
 
+    /**
+     * Method creates a new user.
+     *
+     * @param user that was passed from the controller and that will be saved in the database
+     * @return unique id of new user
+     */
     @Override
     @Transactional
     public Long create(User user) {
@@ -28,12 +39,25 @@ public class UserService implements IUserService {
         return user.getId();
     }
 
+    /**
+     * Method finds an existed user.
+     *
+     * @param id is used to search in the database
+     * @return entity of searched user
+     */
     @Override
     public User findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
     }
 
+    /**
+     * Method updates user status.
+     *
+     * @param id            is used to search in the database
+     * @param userUpdateDto contains user status value
+     * @return dto which contain id of updated user, previous and current status
+     */
     @Override
     @Transactional
     public UserUpdateResponseDto update(Long id, UserUpdateDto userUpdateDto) {

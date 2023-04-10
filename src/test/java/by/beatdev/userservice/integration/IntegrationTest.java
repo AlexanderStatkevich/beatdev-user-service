@@ -25,22 +25,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 public class IntegrationTest {
     @Container
-    private static final MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:8.0.32")
+    private static MySQLContainer<?> mySqlContainer = new MySQLContainer<>("mysql:8.0.32")
             .withDatabaseName("users")
             .withUsername("test")
             .withPassword("test");
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private BlacklistCheckEmailService blacklistCheckEmailService;
+
     @Autowired
     private UserService userService;
 
     @DynamicPropertySource
     static void setProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", mySQLContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", mySQLContainer::getUsername);
-        registry.add("spring.datasource.password", mySQLContainer::getPassword);
+        registry.add("spring.datasource.url", mySqlContainer::getJdbcUrl);
+        registry.add("spring.datasource.username", mySqlContainer::getUsername);
+        registry.add("spring.datasource.password", mySqlContainer::getPassword);
     }
 
     @Test
@@ -55,7 +57,7 @@ public class IntegrationTest {
                 .status(UserStatus.ONLINE)
                 .password("3213")
                 .build();
-        userService.create(expected);
+        userRepository.save(expected);
         User actual = userService.findById(1L);
 
         assertThat(actual).isEqualTo(expected);

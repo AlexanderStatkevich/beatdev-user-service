@@ -6,6 +6,10 @@ import by.beatdev.userservice.service.UserService;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * Described class serves to validate fields which have unique constraint.
+ * Using {@link UniqueEntity} class for marking the field.
+ */
 public class EntityExistValidator implements ConstraintValidator<UniqueEntity, String> {
 
     private final UserService userService;

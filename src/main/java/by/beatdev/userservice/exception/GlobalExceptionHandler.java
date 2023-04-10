@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<List<ErrorResponse>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
-        String message = "incorrect input";
+        String message = "Incorrect input";
         ErrorResponse errorResponse = new ErrorResponse(message);
         return ResponseEntity.badRequest().body(Collections.singletonList(errorResponse));
     }
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<List<ErrorResponse>> handleException(Exception ex) {
         log.error("Unexpected server exception", ex);
-        String message = "server was unable to process the request correctly, please contact the administrator";
+        String message = "Server was unable to process the request correctly, please contact the administrator";
         ErrorResponse errorResponse = new ErrorResponse(message);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonList(errorResponse));
     }
